@@ -14,7 +14,7 @@ df['DateTime'] = pd.to_datetime(df.DateTime,utc=True)
 
 interval = 5
 stock = 'Apple'
-news_time = 60
+news_time = 240
 
 csv_name = '../DataSets/Extract/NewsGroupTime_' + str(news_time) + '/' + str(stock) + str(interval) + '.csv'
 
@@ -30,14 +30,14 @@ chart_data['Movement'] = np.where(chart_data['Open'] < chart_data['Close'],1,0)
 mt = time.time()
 print("Mapping begins")
 
-ch_paras = 0
+ch_arts = 0
 pct = 0
 data = pd.DataFrame(columns=['Source', 'News', 'Movement'])
 for news_index, news in df.iterrows():
-    ch_paras += 1
-    if (math.floor(ch_paras*100/df.shape[0]) - pct) > 0:
-        pct = math.floor(ch_paras*100/df.shape[0])
-        print("Paragraphs checked =", pct, "%")
+    ch_arts += 1
+    if (math.floor(ch_arts*100/df.shape[0]) - pct) > 0:
+        pct = math.floor(ch_arts*100/df.shape[0])
+        print("Articles checked =", pct, "%")
     if news[stock] == 'Yes':
         for chart_index, chart in chart_data.iterrows():
             react_time = (chart.DateTime - news.DateTime).total_seconds()
@@ -45,7 +45,7 @@ for news_index, news in df.iterrows():
                 new_link = {'Source': news.Source, 'News': news.text, 'Movement': chart.Movement}
                 data = data.append(new_link, ignore_index = True)
                 if data.shape[0] % 100 == 0:
-                    print(data.shape[0], "news paragraphs mapped")
+                    print(data.shape[0], "news articles mapped")
                 break
             elif react_time < 0:
                 chart_data.drop(chart_index, inplace = True)
