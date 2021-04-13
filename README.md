@@ -33,6 +33,7 @@ There are three notebooks:
 
 1. `Code/Stock_Models.ipynb` - Contains code for training the following algorithms: XGBoost, Decision tree, SVC, Naive Bayes, Random forest, Logistic regression
 2. `Code/gpt2classifier_recent_news.ipynb` - GPT-2 classifier
+3. `Code/lstmcnnGlove.ipynb` - LSTM-CNN with GloVe Embedding classifier
 
 ## Model Evaluation
 
